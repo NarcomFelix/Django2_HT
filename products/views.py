@@ -7,13 +7,13 @@ MODULE_DIR = os.path.dirname(__file__)
 
 
 def index(request):
-    context = {'title': "GeekShop"}
+    context = {'title': "geekShop"}
     return render(request, 'products/index.html', context)
 
 def products(request):
     file_path = os.path.join(MODULE_DIR, 'fixtures/products.json')
     context = {
-        'title': 'GeekShop - Каталог',
+        'title': 'geekShop - Каталог',
         'products': json.load(open(file_path, encoding='utf-8')),
     }
 
