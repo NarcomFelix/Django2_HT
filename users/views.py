@@ -4,6 +4,7 @@ from django.contrib import auth
 from django.contrib import messages
 
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from baskets.models import Basket
 
 def login(request):
     if request.method == 'POST':
@@ -40,7 +41,10 @@ def profile(request):
             return HttpResponseRedirect(reverse('users:profile'))
     else:
         form = UserProfileForm(instance=request.user)
-    context = {'title': 'GeekShop - Личный кабинет', 'form': form}
+    context = {'title': 'GeekShop - Личный кабинет',
+               'form': form,
+               'baskets': Basket.objects.all()
+               }
     return render(request, 'users/profile.html', context)
 
 def logout(request):
