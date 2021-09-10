@@ -23,6 +23,11 @@ class UserListView(ListView):
     model = User
     template_name = 'admins/admin-users.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(UserListView, self).get_context_data(**kwargs)
+        context['title'] = 'GeekShop - Админ | Пользователи'
+        return context
+
 # Create
 
 # @user_passes_test(lambda u: u.is_staff)
