@@ -43,7 +43,7 @@ def registration(request):
             user = form.save()
             if send_verify_mail(user):
                 print('Сообщение подтверждения отправлено')
-                return HttpResponseRedirect(reverse('auth:login'))
+                return HttpResponseRedirect(reverse('users:login'))
             else:
                 print('ошибка отправки сообщения')
             # messages.success(request, 'Вы успешно зарегистрировались')
