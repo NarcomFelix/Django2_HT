@@ -74,17 +74,17 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('index'))
 
-def verify(request, email, activation_key):
+def verify(self, email, activation_key,):
     try:
         user = User.objects.get(email=email)
         if user.activation_key == activation_key and not user.is_activation_key_expired():
             user.is_active = True
             user.save()
-            auth.login(request, user)
-            return render(request, 'users/verification.html')
+            auth.login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
+            return render(self, 'users/verification.html')
         else:
             print(f'error activation user: {user}')
-            return render(request, 'users/verification.html')
+            return render(self, 'users/verification.html')
     except Exception as err:
         print(f'error activation user: {err.args}')
         return HttpResponseRedirect(reverse('index'))
